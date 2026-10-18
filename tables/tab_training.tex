@@ -1,0 +1,19 @@
+\begin{table}[!t]
+\centering
+\caption{Training efficiency on the RTX 5070 Ti: 40 Phase I epochs and 80 Phase II epochs. Total time and speedup are rounded from the measured epoch durations.}
+\label{tab:training}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{Time (s/epoch)} & Total & Speedup\\
+\cmidrule(lr){2-3}
+Model & Phase I & Phase II & (h) & ($\times$)\\
+\midrule
+Baseline & 230.5 & 216.0 & 7.36 & 1.00\\
+L (+SGC) & \textbf{126.4} & \textbf{111.7} & \textbf{3.89} & \textbf{1.89}\\
+Ours-P & 138.1 & 135.6 & 4.55 & 1.62\\
+Ours-C & 142.0 & 141.2 & 4.72 & 1.56\\
+\bottomrule
+\end{tabular}
+\end{table}

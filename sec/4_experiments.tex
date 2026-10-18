@@ -1,0 +1,89 @@
+\section{Experiments}\label{sec:exp}
+
+\input{tables/tab_sota_comparison}
+\subsection{Experimental Settings}\label{subsec:exp_settings}
+\textbf{Datasets and evaluation.}
+We train on the MSRS training split of $1,083$ registered image pairs and evaluate on its $361$ test pairs~\cite{tang2022seafusion}. To examine transfer across datasets, the same model is evaluated on $25$ TNO pairs~\cite{toet2017tno} and $50$ RoadScene pairs~\cite{xu2022u2fusion} without dataset-specific fine-tuning. These are the evaluation subsets used in this study. Visible images are represented by their luminance for fusion. Quantitative results for the three evaluation sets are summarized in \cref{tab:sota_comparison}.
+% Author check: exact subset lists, training crop/augmentation policy, evaluator implementation, and checkpoint-selection protocol remain in editorial_review/STAGE23_REVIEW.md; no unobserved settings are asserted here.
+
+We report eight complementary metrics: entropy (EN), standard deviation (SD), spatial frequency (SF), mutual information (MI), sum of the correlations of differences (SCD)~\cite{aslantas2015scd}, visual information fidelity (VIF)~\cite{sheikh2006vif}, edge transfer quality ($Q^{AB/F}$)~\cite{xydeas2000qabf}, and structural similarity (SSIM)~\cite{wang2004ssim}. EN and MI assess information content, SD and SF describe intensity variation, and the remaining metrics quantify structural, perceptual, or edge-related fidelity. Higher values are preferred for these metrics, although information content or intensity variation alone does not establish visual quality. We compute fusion SSIM as the sum $\operatorname{SSIM}(\Ifuse,\Iir)+\operatorname{SSIM}(\Ifuse,\Ivis)$, which explains values above one. MI similarly sums the two source--fused mutual information values, using 256 intensity bins and natural logarithms.
+% Evaluator snapshot: 7x7 uniform SSIM window, sample covariance, data_range=2.0 on 0--255 inputs. Retained for numerical continuity; input-range/stabilization compatibility and historical use need checking before submission.
+
+\textbf{Implementation.}
+The network is implemented in PyTorch and trained on one NVIDIA GeForce RTX 5070 Ti. The feature width is $64$, MDTA uses eight heads, and the Mamba state dimension is $16$. Training uses batch size $8$ for $120$ epochs: $40$ reconstruction epochs and $80$ fusion epochs. Optimization uses Adam with an initial learning rate of $1.5\times10^{-4}$; StepLR halves the learning rate every $20$ epochs. The additional losses use the weights specified in \cref{subsec:loss_functions}, and local statistics use $11\times11$ windows with reflection padding.
+% Optimizer corrected to torch.optim.Adam from source_snapshot/models/cddfuse_model.py. The archived config has zero weight decay, BF16 enabled, and 128x128 crops, but selects H5 mode despite random-crop experiment names; do not infer the actual historical data pipeline.
+
+\textbf{Configurations and comparisons.}
+We compare with ten methods: DenseFuse, FusionGAN, DIDFuse, SDNet, U2Fusion, TarDAL, SeAFusion, SwinFusion, FusionMamba, and CDDFuse; their references are given in \cref{tab:sota_comparison}. \textbf{Ours-P} uses the proposed architecture with the original objective, and \textbf{Ours-C} is the full method with the proposed supervision. Both use the same inference graph. The comparison with Ours-P separates the supervision change from the architectural change.
+
+\subsection{Quantitative Comparison}\label{subsec:sota_comparison}
+\Cref{tab:sota_comparison} summarizes fusion quality. The full method is particularly effective in structural correlation and edge preservation, with the original-objective configuration retaining higher MI and perceptual fidelity on the two transfer datasets.
+
+\textbf{MSRS.}
+Ours-C leads or ties in six of the eight metrics among the listed methods. Compared with CDDFuse, EN increases from $6.69$ to $6.73$, SD from $42.99$ to $43.31$, and SCD from $1.61$ to $1.70$. The gain in $Q^{AB/F}$ is smaller ($0.72$ to $0.73$), while VIF and SSIM remain tied at $1.06$ and $0.99$. MI reaches $3.45$, the second-highest value in the comparison. These results indicate that the computational reduction is accompanied by maintained perceptual fidelity and improved structural correlation on the training-domain test set.
+
+\textbf{TNO.}
+The cross-dataset results show a clearer advantage in edge-related fidelity. Ours-P attains the highest MI ($2.72$), VIF ($0.87$), and $Q^{AB/F}$ ($0.61$) among the compared methods. Ours-C achieves $2.48$, $0.83$, and $0.60$, respectively, exceeding CDDFuse's $2.41$, $0.79$, and $0.56$. The full objective also raises SCD from $1.64$ to $1.71$ and SSIM from $0.98$ to $1.01$. Thus, the improvement transfers beyond MSRS, with the full-objective results showing higher structural correlation and SSIM than CDDFuse.
+
+\textbf{RoadScene.}
+Ours-C improves VIF from $0.69$ to $0.75$ and $Q^{AB/F}$ from $0.56$ to $0.61$ relative to CDDFuse, gains of approximately $8.7\%$ and $8.9\%$. It also increases SD from $48.78$ to $50.12$, MI from $2.47$ to $2.54$, and SCD from $1.68$ to $1.72$, while retaining SSIM of $0.95$. Ours-P gives the highest VIF and $Q^{AB/F}$, whereas Ours-C provides stronger contrast and structural correlation. These results show that the gains in edge transfer are accompanied by improved contrast and structural correlation on RoadScene.
+
+\subsection{Qualitative Comparison}\label{subsec:qualitative}
+\Cref{fig:visual_msrs,fig:visual_roadscene} compare nighttime and daytime scenes. Each example includes full images and two aligned enlarged regions, allowing target visibility and background detail to be assessed together.
+
+\textbf{Nighttime scene.}
+In \cref{fig:visual_msrs}, the visible source contains a bright foreground target but weak surrounding structure. The infrared source contributes complementary target and scene information. SDNet and U2Fusion retain a relatively subdued background, while TarDAL-DT produces stronger background amplification accompanied by visible noise. SCMFuse preserves the bright target and its surrounding boundaries while keeping the dark background appearance. Its difference from CDDFuse is more subtle than its difference from the earlier baselines, consistent with their close MSRS perceptual scores.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{figs/visual_sota_msrs.pdf}
+\caption{Nighttime visual comparison. The red boxes enlarge a foreground target; the green boxes show background structures. Each full image is paired with the same two crops.}
+\label{fig:visual_msrs}
+\end{figure*}
+
+\textbf{Daytime driving scene.}
+\Cref{fig:visual_roadscene} contains a vehicle with different infrared and visible appearances, together with a bright building facade. SwinFusion's result has low contrast in the highlighted facade, making window and traffic-signal details less distinct. SCMFuse combines a visible rear-window boundary with thermal cues around the vehicle and retains the traffic signal and window outlines in the green crop. CDDFuse provides a similarly detailed result; the dataset-level VIF and $Q^{AB/F}$ improvements offer broader evidence for the proposed method than either selected image alone.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{figs/visual_sota_roadscene.pdf}
+\caption{Daytime visual comparison. The red boxes highlight the vehicle, and the green boxes cover the traffic signal and building windows. Enlarged regions use the same locations across methods.}
+\label{fig:visual_roadscene}
+\end{figure*}
+% Visual assets are retained without altering any fused result. Exact Ours checkpoint and TarDAL-DT/TarDAL mapping are recorded as provenance items in the final editorial review.
+
+\subsection{Computational Efficiency}\label{subsec:efficiency}
+\input{tables/tab_complexity}
+\input{tables/tab_training}
+\textbf{Model size and operations.}
+As shown in \cref{tab:complexity}, SCMFuse uses $0.473$ M parameters and $87.837$ G FLOPs under the reported profile, compared with $1.188$ M and $235.716$ G for CDDFuse. The reductions are $60.2\%$ and $62.7\%$, respectively. Ours-P and Ours-C have identical model complexity because the additional supervision is evaluated only during training. Although several convolutional methods are smaller, SCMFuse combines its compact model with stronger fusion scores across multiple fidelity and structure metrics.
+% Profiling input dimensions, operator coverage, and the specific baseline implementations were not independently remeasured; see final review.
+
+The SGC and SCM Blocks contain point-wise projections with $\mathcal O(HWD^2)$ cost when kernel sizes, expansion ratios, state dimensions, and head counts are fixed. Both scale linearly with spatial size for fixed $D$. Pooling confines the four-directional scan to one-quarter of the original token count per direction for even image dimensions, while the main residual path remains full resolution. The resulting runtime benefit is evaluated through the measured latency rather than inferred from asymptotic complexity alone.
+
+\textbf{Training and inference.}
+\Cref{tab:training} shows that the lightweight configuration L reduces total training time from $7.36$ to $3.89$ hours. Ours-P and Ours-C require approximately $4.55$ and $4.72$ hours, corresponding to $1.62\times$ and $1.56\times$ acceleration. The contrast--structure terms add a small training overhead to the same inference architecture.
+
+\input{tables/tab_efficiency_comparison}
+\Cref{tab:efficiency_comparison} reports inference time across the three datasets. Ours-C reduces MSRS latency from $309.1$ to $160.6$ ms, TNO latency from $1017.3$ to $310.4$ ms, and RoadScene latency from $1153.8$ to $373.9$ ms. Averaging these dataset-specific latency ratios gives a $2.76\times$ mean speedup. Ours-P achieves $2.78\times$. The two configurations share the same inference design; their small timing difference does not establish a runtime benefit from changing the loss. The efficiency gain is most pronounced on TNO and RoadScene, where the baseline has the largest latency.
+% Timing precision, input resolutions, CUDA synchronization, I/O exclusion, warm-up and repetitions require the original benchmark script for full reproducibility.
+
+\subsection{Ablation Studies}\label{subsec:ablation_study}
+\textbf{Progressive configurations.}
+\Cref{tab:main_ablation} evaluates four configurations: \textbf{B}, the CDDFuse baseline; \textbf{L}, B with the SGC-based encoder and hybrid decoder; \textbf{A}, L with the SCM Block, DGF, and MGF; and \textbf{F}, A with the proposed supervision. A and F correspond to Ours-P and Ours-C. Each step tests a defined set of changes within the complete framework.
+% Historical mapping: B=Exp-0; L=Exp-1; A=manuscript Exp-2 / historical Exp-3_v2; F=manuscript Exp-3 / loss-enabled Exp-3_v2.
+\input{tables/tab_main_ablation}
+
+\textbf{Local processing (B $\to$ L).}
+Replacing the shallow processing and decoder configuration increases throughput from $3.24$ to $7.01$ FPS on MSRS, $0.98$ to $3.00$ FPS on TNO, and $0.87$ to $1.84$ FPS on RoadScene. SD and SCD also increase on all three datasets, while VIF and $Q^{AB/F}$ remain close to the baseline. This establishes an efficient starting point for the deeper architectural changes.
+
+\textbf{Space--channel modeling and fusion (L $\to$ A).}
+The combined addition of the SCM Block and learned fusion gates improves TNO MI from $2.35$ to $2.72$, VIF from $0.81$ to $0.87$, and $Q^{AB/F}$ from $0.56$ to $0.61$. The corresponding RoadScene values increase from $2.39$, $0.70$, and $0.55$ to $2.62$, $0.77$, and $0.62$. MSRS $Q^{AB/F}$ rises to $0.73$. These results support the joint spatial--channel and aggregation design, particularly for transfer to the two other datasets.
+
+\textbf{Proposed supervision (A $\to$ F).}
+Adding the new objective raises SCD from $1.61/1.60/1.62$ to $1.70/1.71/1.72$ on MSRS/TNO/RoadScene. SD increases from $43.02/43.46/49.17$ to $43.31/43.63/50.12$, and SSIM from $0.98/0.97/0.92$ to $0.99/1.01/0.95$. MSRS MI also improves from $3.35$ to $3.45$. The full objective retains the MSRS VIF and $Q^{AB/F}$ values and trades a small portion of the TNO/RoadScene perceptual scores for higher structural correlation and contrast. The comparison evaluates the supervision package as a whole, rather than the contribution of each individual loss term.
+
+\textbf{Intermediate architectural designs.}
+\Cref{tab:mamba_variants} compares two exploratory designs with the final original-loss architecture. Variant V1 downsamples the base trunk and uses a scan-output channel normalization while retaining MDTA at the reduced resolution. Variant V2 uses channel scaling, removes MDTA, and applies an additional feature-rescaling operation. The final design retains the full-resolution residual stream and MDTA, and omits that feature rescaling.
+\input{tables/tab_mamba_variants}
+The final design achieves the highest TNO and RoadScene MI and VIF among these alternatives, with $Q^{AB/F}$ also leading or tying. Because several choices differ jointly, this comparison supports the integrated design rather than isolating normalization, resolution, or attention effects. Together with the progressive study, these results support the choice of the final architecture.

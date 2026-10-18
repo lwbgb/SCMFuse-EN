@@ -1,0 +1,278 @@
+% =========================================================================
+% 1. 双分支解耦基线与底层视觉基础架构 (Baseline, Transformer, CNN, INN)
+% =========================================================================
+@inproceedings{zhao2023cddfuse,
+  author    = {Zhao, Zixiang and Bai, Haowen and Zhang, Jiangshe and Zhang, Yulun and Xu, Shuang and Lin, Zudi and Timofte, Radu and Van Gool, Luc},
+  title     = {{CDDFuse}: Correlation-Driven Dual-Branch Feature Decomposition for Multi-Modality Image Fusion},
+  booktitle = {Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR)},
+  pages     = {5906--5916},
+  year      = {2023}
+}
+
+@inproceedings{zamir2022restormer,
+  author    = {Zamir, Syed Waqas and Arora, Aditya and Khan, Salman and Hayat, Munawar and Khan, Fahad Shahbaz and Yang, Ming-Hsuan},
+  title     = {Restormer: Efficient Transformer for High-Resolution Image Restoration},
+  booktitle = {Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR)},
+  pages     = {5728--5739},
+  year      = {2022}
+}
+
+@inproceedings{chen2022simple,
+  author    = {Chen, Liangyu and Chu, Xiaojie and Zhang, Xiangyu and Sun, Jian},
+  title     = {Simple Baselines for Image Restoration},
+  booktitle = {Proc. Eur. Conf. Comput. Vis. (ECCV)},
+  pages     = {17--33},
+  year      = {2022}
+}
+
+@inproceedings{zhao2020didfuse,
+  author    = {Zhao, Zixiang and Xu, Shuang and Zhang, Chunxia and Liu, Junmin and Zhang, Jiangshe and Li, Pengfei},
+  title     = {{DIDFuse}: Deep Image Decomposition for Infrared and Visible Image Fusion},
+  booktitle = {Proc. Int. Joint Conf. Artif. Intell. (IJCAI)},
+  pages     = {970--976},
+  year      = {2020}
+}
+
+@inproceedings{dinh2017density,
+  author    = {Dinh, Laurent and Sohl-Dickstein, Jascha and Bengio, Samy},
+  title     = {Density Estimation Using {Real NVP}},
+  booktitle = {Proc. Int. Conf. Learn. Represent. (ICLR)},
+  year      = {2017}
+}
+
+% =========================================================================
+% 2. 状态空间模型与视觉异构主干 (Mamba, MambaVision, VMamba, MambaIR)
+% =========================================================================
+@article{gu2023mamba,
+  author    = {Gu, Albert and Dao, Tri},
+  title     = {Mamba: Linear-Time Sequence Modeling with Selective State Spaces},
+  journal   = {arXiv preprint arXiv:2312.00752},
+  year      = {2023}
+}
+
+@inproceedings{hatamizadeh2025mambavision,
+  author    = {Hatamizadeh, Ali and Kautz, Jan},
+  title     = {{MambaVision}: A Hybrid {Mamba-Transformer} Vision Backbone},
+  booktitle = {Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR)},
+  pages     = {25261--25270},
+  year      = {2025}
+}
+
+@inproceedings{liu2024vmamba,
+  author    = {Liu, Yue and Tian, Yunjie and Zhao, Yuzhong and Yu, Hongtian and Xie, Lingxi and Wang, Yaowei and Ye, Qixiang and Jiao, Jianbin and Liu, Yunfan},
+  title     = {{VMamba}: Visual State Space Model},
+  booktitle = {Adv. Neural Inf. Process. Syst. (NeurIPS)},
+  volume    = {37},
+  pages     = {103031--103063},
+  year      = {2024}
+}
+
+@inproceedings{guo2024mambair,
+  author    = {Guo, Hang and Li, Jinmin and Dai, Tao and Ouyang, Zhihao and Ren, Xudong and Xia, Shu-Tao},
+  title     = {{MambaIR}: A Simple Baseline for Image Restoration with State-Space Model},
+  booktitle = {Proc. Eur. Conf. Comput. Vis. (ECCV)},
+  pages     = {222--241},
+  year      = {2024}
+}
+
+@inproceedings{pei2025efficientvmamba,
+  author    = {Pei, Xiaohuan and Huang, Tao and Xu, Chang},
+  title     = {{EfficientVMamba}: Atrous Selective Scan for Light Weight Visual Mamba},
+  booktitle = {Proc. AAAI Conf. Artif. Intell. (AAAI)},
+  volume    = {39},
+  number    = {6},
+  pages     = {6443--6451},
+  year      = {2025}
+}
+
+% =========================================================================
+% 3. 数据集基准、权威综述与客观评价指标出处 (Benchmarks & Metrics)
+% =========================================================================
+@article{ma2019survey,
+  author    = {Ma, Jiayi and Ma, Yong and Li, Chang},
+  title     = {Infrared and Visible Image Fusion Methods and Applications: A Survey},
+  journal   = {Inf. Fusion},
+  volume    = {45},
+  pages     = {153--178},
+  year      = {2019}
+}
+
+@article{tang2022seafusion,
+  author    = {Tang, Linfeng and Yuan, Jiteng and Ma, Jiayi},
+  title     = {Image Fusion in the Loop of High-Level Vision Tasks: A Semantic-Aware Real-Time Infrared and Visible Image Fusion Network},
+  journal   = {Inf. Fusion},
+  volume    = {82},
+  pages     = {28--42},
+  year      = {2022}
+}
+
+@article{toet2017tno,
+  author    = {Toet, Alexander},
+  title     = {The {TNO} Multiband Image Data Collection},
+  journal   = {Data Brief},
+  volume    = {15},
+  pages     = {249--251},
+  year      = {2017}
+}
+
+@article{xu2022u2fusion,
+  author    = {Xu, Han and Ma, Jiayi and Jiang, Junjun and Guo, Xiaojie and Ling, Haibin},
+  title     = {{U2Fusion}: A Unified Unsupervised Image Fusion Network},
+  journal   = {IEEE Trans. Pattern Anal. Mach. Intell.},
+  volume    = {44},
+  number    = {1},
+  pages     = {502--518},
+  year      = {2022}
+}
+
+@article{sheikh2006vif,
+  author    = {Sheikh, Hamid R. and Bovik, Alan C.},
+  title     = {Image Information and Visual Quality},
+  journal   = {IEEE Trans. Image Process.},
+  volume    = {15},
+  number    = {2},
+  pages     = {430--444},
+  year      = {2006}
+}
+
+@article{xydeas2000qabf,
+  author    = {Xydeas, C. S. and Petrovi{\'c}, V.},
+  title     = {Objective Image Fusion Performance Measure},
+  journal   = {Electron. Lett.},
+  volume    = {36},
+  number    = {4},
+  pages     = {308--309},
+  year      = {2000}
+}
+
+@article{aslantas2015scd,
+  author    = {Aslantas, V. and Bendes, E.},
+  title     = {A New Image Quality Metric for Image Fusion: The Sum of the Correlations of Differences},
+  journal   = {AEU-Int. J. Electron. Commun.},
+  volume    = {69},
+  number    = {12},
+  pages     = {1890--1896},
+  year      = {2015}
+}
+
+@article{wang2004ssim,
+  author    = {Wang, Zhou and Bovik, Alan C. and Sheikh, Hamid R. and Simoncelli, Eero P.},
+  title     = {Image Quality Assessment: From Error Visibility to Structural Similarity},
+  journal   = {IEEE Trans. Image Process.},
+  volume    = {13},
+  number    = {4},
+  pages     = {600--612},
+  year      = {2004}
+}
+
+% =========================================================================
+% 4. 主流 SOTA 图像融合对比方法 (用于 Stage 3 实验对比与 Stage 4 相关工作)
+% =========================================================================
+@article{li2019densefuse,
+  author    = {Li, Hui and Wu, Xiao-Jun},
+  title     = {{DenseFuse}: A Fusion Approach to Infrared and Visible Images},
+  journal   = {IEEE Trans. Image Process.},
+  volume    = {28},
+  number    = {5},
+  pages     = {2614--2623},
+  year      = {2019}
+}
+
+@article{ma2019fusiongan,
+  author    = {Ma, Jiayi and Yu, Wei and Liang, Pengwei and Li, Chang and Jiang, Junjun},
+  title     = {{FusionGAN}: A Generative Adversarial Network for Infrared and Visible Image Fusion},
+  journal   = {Inf. Fusion},
+  volume    = {48},
+  pages     = {11--26},
+  year      = {2019}
+}
+
+@article{zhang2021sdnet,
+  author    = {Zhang, Hao and Ma, Jiayi},
+  title     = {{SDNet}: A Versatile Squeeze-and-Decomposition Network for Real-Time Image Fusion},
+  journal   = {Int. J. Comput. Vis.},
+  volume    = {129},
+  number    = {10},
+  pages     = {2761--2785},
+  year      = {2021}
+}
+
+@article{ma2022swinfusion,
+  author    = {Ma, Jiayi and Tang, Linfeng and Fan, Fan and Huang, Jun and Mei, Xiaoguang and Ma, Yong},
+  title     = {{SwinFusion}: Cross-Domain Long-Range Learning for General Image Fusion via {Swin Transformer}},
+  journal   = {IEEE/CAA J. Autom. Sinica},
+  volume    = {9},
+  number    = {7},
+  pages     = {1200--1217},
+  year      = {2022}
+}
+
+@inproceedings{liu2022tardal,
+  author    = {Liu, Jinyuan and Fan, Xin and Huang, Zhanbo and Wu, Guanyao and Liu, Risheng and Zhong, Wei and Luo, Zhongxuan},
+  title     = {Target-Aware Dual Adversarial Learning and a Multi-Scenario Multi-Modality Benchmark to Fuse Infrared and Visible for Object Detection},
+  booktitle = {Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR)},
+  pages     = {5802--5811},
+  year      = {2022}
+}
+
+@article{xie2024fusionmamba,
+  author    = {Xie, Xinyu and Cui, Yawen and Tan, Tao and Zheng, Xubin and Yu, Zitong},
+  title     = {{FusionMamba}: Dynamic Feature Enhancement for Multimodal Image Fusion with {Mamba}},
+  journal   = {Vis. Intell.},
+  volume    = {2},
+  number    = {1},
+  pages     = {37},
+  year      = {2024}
+}
+
+@article{li2024mambadfuse,
+  author    = {Li, Zhe and Pan, Haiwei and Zhang, Kejia and Wang, Yuhua and Yu, Fengming},
+  title     = {{MambaDFuse}: A {Mamba}-Based Dual-Phase Model for Multi-Modality Image Fusion},
+  journal   = {arXiv preprint arXiv:2404.08406},
+  year      = {2024}
+}
+
+% =========================================================================
+% 5. 阶段四新增的 3 篇基础高引文献 (追加至 refs.bib 末尾)
+% =========================================================================
+@article{tang2022piafusion,
+  author    = {Tang, Linfeng and Yuan, Jiteng and Zhang, Hao and Jiang, Xingyu and Ma, Jiayi},
+  title     = {{PIAFusion}: A Progressive Infrared and Visible Image Fusion Network Based on Illumination Aware},
+  journal   = {Inf. Fusion},
+  volume    = {83--84},
+  pages     = {79--92},
+  year      = {2022},
+  doi       = {10.1016/j.inffus.2022.03.007}
+}
+
+@inproceedings{dosovitskiy2020image,
+  author    = {Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and Weissenborn, Dirk and Zhai, Xiaohua and Unterthiner, Thomas and Dehghani, Mostafa and Minderer, Matthias and Heigold, Georg and Gelly, Sylvain and Uszkoreit, Jakob and Houlsby, Neil},
+  title     = {An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},
+  booktitle = {Proc. Int. Conf. Learn. Represent. (ICLR)},
+  year      = {2021}
+}
+
+@inproceedings{liu2021swin,
+  author    = {Liu, Ze and Lin, Yutong and Cao, Yue and Hu, Han and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Guo, Baining},
+  title     = {Swin {Transformer}: Hierarchical Vision {Transformer} Using Shifted Windows},
+  booktitle = {Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV)},
+  pages     = {10012--10022},
+  year      = {2021}
+}
+
+@article{wu2025fcformer,
+ author={Wu, Xiao and Cao, Zi-Han and Huang, Ting-Zhu and Deng, Liang-Jian and Chanussot, Jocelyn and Vivone, Gemine},
+ title={Fully-Connected Transformer for Multi-Source Image Fusion},
+ journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+ volume={47}, number={3}, pages={2071--2088}, year={2025},
+ doi={10.1109/TPAMI.2024.3523364}
+}
+
+
+@article{zhao2025freefusion,
+ author={Zhao, Wenda and Cui, Hengshuai and Wang, Haipeng and He, You and Lu, Huchuan},
+ title={{FreeFusion}: Infrared and Visible Image Fusion via Cross Reconstruction Learning},
+ journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+ volume={47}, number={9}, pages={8040--8056}, year={2025},
+ doi={10.1109/TPAMI.2025.3572599}
+}

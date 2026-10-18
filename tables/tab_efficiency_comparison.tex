@@ -1,0 +1,20 @@
+\begin{table*}[!t]
+\centering
+\caption{Inference latency (ms) and throughput (FPS) on the RTX 5070 Ti. Mean speedup is the arithmetic mean of the three dataset-specific latency ratios relative to CDDFuse. Best entries are bold.}
+\label{tab:efficiency_comparison}
+\small
+\setlength{\tabcolsep}{9pt}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{MSRS} & \multicolumn{2}{c}{TNO} & \multicolumn{2}{c}{RoadScene} & Mean\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Model & ms & FPS & ms & FPS & ms & FPS & speedup\\
+\midrule
+SwinFusion & 412.5 & 2.42 & 1240.0 & 0.81 & 1385.2 & 0.72 & $0.80\times$\\
+CDDFuse & 309.1 & 3.24 & 1017.3 & 0.98 & 1153.8 & 0.87 & $1.00\times$\\
+L (+SGC) & \textbf{142.6} & \textbf{7.01} & 333.6 & 3.00 & 542.7 & 1.84 & $2.45\times$\\
+Ours-P & 161.0 & 6.21 & \textbf{304.9} & \textbf{3.28} & \textbf{373.1} & \textbf{2.68} & $\mathbf{2.78\times}$\\
+Ours-C & 160.6 & 6.23 & 310.4 & 3.22 & 373.9 & 2.67 & $2.76\times$\\
+\bottomrule
+\end{tabular}
+\end{table*}

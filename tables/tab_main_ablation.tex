@@ -1,0 +1,33 @@
+\begin{table*}[!t]
+\centering
+\caption{Progressive ablation. B: CDDFuse; L: lightweight encoder--decoder; A: L with the SCM Block, DGF, and MGF; F: A with the proposed supervision. A and F correspond to Ours-P and Ours-C. The best and second-best values are marked in \best{bold red} and \second{underlined blue}. Ties follow the displayed precision; all metrics are higher-is-better.}
+\label{tab:main_ablation}
+\small
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{@{}lrrrrrrrr@{}}
+\toprule
+Method & EN & SD & SF & MI & SCD & VIF & $Q^{AB/F}$ & SSIM\\
+\midrule
+\multicolumn{9}{c}{\textbf{MSRS}}\\
+\midrule
+B (Baseline) & 6.69 & 42.99 & \second{11.71} & \best{3.68} & 1.61 & \best{1.06} & \second{0.72} & \second{0.99}\\
+L (+SGC) & \second{6.70} & \second{43.16} & 11.67 & \second{3.62} & \second{1.65} & \best{1.06} & \second{0.72} & \best{1.00}\\
+A (+SCM and gates) & \second{6.70} & 43.02 & \best{11.75} & 3.35 & 1.61 & \best{1.06} & \best{0.73} & 0.98\\
+F (+Supervision) & \best{6.73} & \best{43.31} & 11.66 & 3.45 & \best{1.70} & \best{1.06} & \best{0.73} & \second{0.99}\\
+\midrule
+\multicolumn{9}{c}{\textbf{TNO}}\\
+\midrule
+B (Baseline) & \second{7.10} & \second{45.47} & \second{13.49} & 2.41 & 1.64 & 0.79 & 0.56 & \second{0.98}\\
+L (+SGC) & \best{7.11} & \best{45.73} & \best{13.50} & 2.35 & \best{1.72} & 0.81 & 0.56 & \best{1.01}\\
+A (+SCM and gates) & 7.08 & 43.46 & 13.14 & \best{2.72} & 1.60 & \best{0.87} & \best{0.61} & 0.97\\
+F (+Supervision) & 7.08 & 43.63 & 13.26 & \second{2.48} & \second{1.71} & \second{0.83} & \second{0.60} & \best{1.01}\\
+\midrule
+\multicolumn{9}{c}{\textbf{RoadScene}}\\
+\midrule
+B (Baseline) & 7.30 & 48.78 & \best{15.88} & 2.47 & 1.68 & 0.69 & 0.56 & \second{0.95}\\
+L (+SGC) & \best{7.37} & \best{51.35} & 15.73 & 2.39 & \best{1.76} & 0.70 & 0.55 & \best{0.96}\\
+A (+SCM and gates) & 7.30 & 49.17 & 15.71 & \best{2.62} & 1.62 & \best{0.77} & \best{0.62} & 0.92\\
+F (+Supervision) & \second{7.32} & \second{50.12} & \second{15.84} & \second{2.54} & \second{1.72} & \second{0.75} & \second{0.61} & \second{0.95}\\
+\bottomrule
+\end{tabular}
+\end{table*}

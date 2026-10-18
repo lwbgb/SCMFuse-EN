@@ -1,0 +1,19 @@
+\begin{table}[!t]
+\centering
+\caption{Network specification. All feature maps retain $H\times W$ except inside the scan path. $D=64$; base and detail inputs to the decoder are concatenated.}
+\label{tab:tensor_dimensions}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llc@{}}
+\toprule
+Component & Main operations & Channels\\
+\midrule
+Shared encoder & $3\times3$ conv., $2\times$ SGC & $1\to D$\\
+Base branch & SCM Block & $D\to D$\\
+Detail branch & $3\times$ detail node & $D\to D$\\
+Base fusion & DGF, SCM refinement & $2D\to D$\\
+Detail fusion & MGF, $1\times$ detail node & $2D\to D$\\
+Hybrid decoder & MDTA block, $2\times$ SGC & $2D\to1$\\
+\bottomrule
+\end{tabular}
+\end{table}

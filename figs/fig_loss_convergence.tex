@@ -1,0 +1,137 @@
+% ARCHIVED / NOT INCLUDED: curve samples require verification against raw logs; do not infer convergence from this plot.
+\begin{figure*}[t]
+    \centering
+    \begin{tikzpicture}
+        % ==================== 子图 (a): Phase I 训练收敛曲线 (对数坐标 + 局部放大) ====================
+        \begin{axis}[
+            name=plotA,
+            width=0.33\textwidth,
+            height=4.6cm,
+            title={\textbf{(a) Phase I Training Loss (Epochs 1--40)}},
+            title style={font=\footnotesize, yshift=-2pt},
+            xlabel={Epoch (Phase I: Disentanglement)},
+            ylabel={Training Loss (Log Scale)},
+            ymode=log,
+            xmin=1, xmax=40,
+            ymin=0.0015, ymax=0.25,
+            xtick={1, 10, 20, 30, 40},
+            grid=both,
+            grid style={dashed, gray!30},
+            tick label style={font=\scriptsize},
+            label style={font=\footnotesize},
+            legend style={font=\tiny, at={(0.97,0.97)}, anchor=north east, draw=gray!50, fill=white, fill opacity=0.9}
+        ]
+            % LR Decay 标记线 (Epoch 20)
+            \draw[dashed, gray!80, line width=0.6pt] (axis cs:20,0.0015) -- (axis cs:20,0.25);
+            \node[font=\tiny, text=gray!80!black, rotate=90, anchor=south] at (axis cs:20,0.025) {LR $\times 0.5$};
+
+            % Exp-2 (Orig. Loss) Phase I 真实日志数据
+            \addplot[color=blue!75!black, line width=1.1pt, mark=*, mark size=1.0pt, mark repeat=4] coordinates {
+                (1,0.173479) (2,0.016315) (3,0.012317) (4,0.008637) (5,0.008752)
+                (6,0.007547) (7,0.005664) (8,0.005415) (9,0.004888) (10,0.006068)
+                (11,0.004766) (12,0.003820) (13,0.004040) (14,0.003773) (15,0.004477)
+                (16,0.004463) (17,0.003972) (18,0.003042) (19,0.003393) (20,0.003358)
+                (21,0.002191) (22,0.002186) (23,0.002168) (24,0.002151) (25,0.002071)
+                (26,0.002318) (27,0.002153) (28,0.002093) (29,0.002108) (30,0.002096)
+                (31,0.002060) (32,0.002188) (33,0.002088) (34,0.001996) (35,0.002098)
+                (36,0.002009) (37,0.002023) (38,0.001976) (39,0.002190) (40,0.002113)
+            };
+            \addlegendentry{Exp-2 (Orig. Loss)}
+
+            % Exp-3 (Proposed Loss) Phase I 真实日志数据
+            \addplot[color=red!80!black, line width=1.1pt, mark=triangle*, mark size=1.2pt, mark repeat=4] coordinates {
+                (1,0.200131) (2,0.020784) (3,0.014873) (4,0.009601) (5,0.008429)
+                (6,0.008565) (7,0.007481) (8,0.006775) (9,0.008342) (10,0.006415)
+                (11,0.005305) (12,0.005109) (13,0.005039) (14,0.005053) (15,0.005581)
+                (16,0.005398) (17,0.005315) (18,0.004174) (19,0.004385) (20,0.004726)
+                (21,0.003038) (22,0.002925) (23,0.002878) (24,0.002940) (25,0.002764)
+                (26,0.002798) (27,0.002831) (28,0.002822) (29,0.002756) (30,0.002747)
+                (31,0.002942) (32,0.002724) (33,0.002676) (34,0.002710) (35,0.002650)
+                (36,0.002865) (37,0.002686) (38,0.002718) (39,0.002672) (40,0.002757)
+            };
+            \addlegendentry{Exp-3 (Proposed Loss)}
+        \end{axis}
+
+        % ==================== 子图 (b): Phase II 训练收敛曲线 (Epochs 41--120) ====================
+        \begin{axis}[
+            name=plotB,
+            at={(plotA.east)}, anchor=west, xshift=1.15cm,
+            width=0.33\textwidth,
+            height=4.6cm,
+            title={\textbf{(b) Phase II Training Loss (Epochs 41--120)}},
+            title style={font=\footnotesize, yshift=-2pt},
+            xlabel={Epoch (Phase II: Synergistic Fusion)},
+            ylabel={Training Loss},
+            xmin=41, xmax=120,
+            ymin=0.15, ymax=0.41,
+            xtick={41, 60, 80, 100, 120},
+            grid=both,
+            grid style={dashed, gray!30},
+            tick label style={font=\scriptsize},
+            label style={font=\footnotesize},
+            legend style={font=\tiny, at={(0.97,0.97)}, anchor=north east, draw=gray!50, fill=white, fill opacity=0.9}
+        ]
+            % LR Decay 标记线 (Epochs 60, 80, 100)
+            \draw[dashed, gray!70, line width=0.5pt] (axis cs:60,0.15) -- (axis cs:60,0.41);
+            \draw[dashed, gray!70, line width=0.5pt] (axis cs:80,0.15) -- (axis cs:80,0.41);
+            \draw[dashed, gray!70, line width=0.5pt] (axis cs:100,0.15) -- (axis cs:100,0.41);
+
+            % Exp-2 (Orig. Loss) Phase II 真实日志数据
+            \addplot[color=blue!75!black, line width=1.1pt, mark=*, mark size=1.0pt, mark repeat=8] coordinates {
+                (41,0.353125) (42,0.270876) (44,0.250562) (46,0.240133) (48,0.230382) (50,0.220892)
+                (52,0.212290) (54,0.206116) (56,0.201580) (58,0.197835) (60,0.194658) (61,0.191487)
+                (64,0.188710) (68,0.185867) (70,0.184651) (71,0.183891) (75,0.181443) (80,0.178625)
+                (81,0.177316) (85,0.175714) (90,0.173799) (95,0.172090) (100,0.170320) (101,0.169628)
+                (105,0.168736) (110,0.167646) (115,0.166671) (120,0.165694)
+            };
+            \addlegendentry{Exp-2 (Final: 0.1657)}
+
+            % Exp-3 (Proposed Loss) Phase II 真实日志数据
+            \addplot[color=red!80!black, line width=1.1pt, mark=triangle*, mark size=1.2pt, mark repeat=8] coordinates {
+                (41,0.397943) (42,0.320656) (44,0.298994) (46,0.287053) (48,0.277207) (50,0.267539)
+                (52,0.259492) (54,0.253320) (56,0.247654) (58,0.243282) (60,0.239492) (61,0.236772)
+                (64,0.233762) (68,0.230802) (70,0.229379) (71,0.228585) (75,0.226017) (80,0.223217)
+                (81,0.221984) (85,0.220505) (90,0.218946) (95,0.217448) (100,0.216131) (101,0.215518)
+                (105,0.214903) (110,0.214146) (115,0.213484) (120,0.212763)
+            };
+            \addlegendentry{Exp-3 (Final: 0.2128)}
+        \end{axis}
+
+        % ==================== 子图 (c): 三大测试集 Average Test Loss 对比柱状图 ====================
+        \begin{axis}[
+            name=plotC,
+            at={(plotB.east)}, anchor=west, xshift=1.15cm,
+            width=0.33\textwidth,
+            height=4.6cm,
+            ybar=2pt,
+            bar width=5.5pt,
+            title={\textbf{(c) Test Loss Comparison Across Benchmarks}},
+            title style={font=\footnotesize, yshift=-2pt},
+            Symbolic x coords={MSRS, TNO, RoadScene},
+            xtick=data,
+            ymin=0, ymax=1.02,
+            ylabel={Average Test Loss $\downarrow$},
+            ymajorgrids=true,
+            grid style={dashed, gray!30},
+            tick label style={font=\scriptsize},
+            label style={font=\footnotesize},
+            legend style={font=\tiny, at={(0.03,0.97)}, anchor=north west, draw=gray!50, fill=white, fill opacity=0.9},
+            nodes near coords,
+            every node near coord/.append style={font=\tiny, rotate=90, anchor=west, /pgf/number format/fixed, /pgf/number format/precision=2}
+        ]
+            \addplot[fill=gray!60, draw=gray!80!black] coordinates {(MSRS, 0.1757) (TNO, 0.6283) (RoadScene, 0.8392)};
+            \addlegendentry{Exp-0 (Baseline)}
+
+            \addplot[fill=orange!70, draw=orange!80!black] coordinates {(MSRS, 0.1837) (TNO, 0.5782) (RoadScene, 0.8705)};
+            \addlegendentry{Exp-1 (+ShallowCNN)}
+
+            \addplot[fill=blue!65, draw=blue!80!black] coordinates {(MSRS, 0.1484) (TNO, 0.4273) (RoadScene, 0.5662)};
+            \addlegendentry{Exp-2 (+SC-Mamba)}
+
+            \addplot[fill=red!70, draw=red!80!black] coordinates {(MSRS, 0.1517) (TNO, 0.4360) (RoadScene, 0.5756)};
+            \addlegendentry{Exp-3 (Full)}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Two-stage training convergence trajectories and multi-benchmark test loss evaluation. \textbf{(a)} Phase I auto-encoding feature disentanglement loss (Epochs 1--40, log scale). \textbf{(b)} Phase II cross-modal synergistic fusion loss (Epochs 41--120), with StepLR milestones indicated (dashed vertical lines). \textbf{(c)} Average test fusion loss across MSRS ($361$ pairs), TNO ($25$ pairs), and RoadScene ($50$ pairs), retained for comparison only after the evaluation-loss definitions and plotted values have been verified.}
+    \label{fig:loss_convergence}
+\end{figure*}

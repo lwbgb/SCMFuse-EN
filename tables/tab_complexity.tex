@@ -1,0 +1,24 @@
+\begin{table}[!t]
+\centering
+\caption{Reported model size and computational cost. Ours-P and Ours-C share the inference graph.}
+\label{tab:complexity}
+\small
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Method & Params (M) & FLOPs (G)\\
+\midrule
+DenseFuse & 0.074 & 11.532\\
+FusionGAN & 0.926 & 124.775\\
+DIDFuse & 0.261 & 48.620\\
+SDNet & 0.029 & 3.746\\
+U2Fusion & 0.659 & 86.341\\
+TarDAL & 0.297 & 38.768\\
+SeAFusion & 0.167 & 21.758\\
+SwinFusion & 0.974 & 149.365\\
+FusionMamba & 164.539 & 92.076\\
+CDDFuse & 1.188 & 235.716\\
+Ours-P / Ours-C & 0.473 & 87.837\\
+\bottomrule
+\end{tabular}
+\end{table}

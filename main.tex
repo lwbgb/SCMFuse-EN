@@ -1,0 +1,43 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+\usepackage[margin=1.8cm, columnsep=0.6cm]{geometry}
+
+% 引入全局宏包与数学符号定义
+\input{macros.tex}
+
+% ==================== 论文标题与作者信息 ====================
+\title{\vspace{-1.0cm}\Large\bfseries SCMFuse: Efficient Space--Channel Mamba Fusion for Infrared and Visible Images}
+
+\author{
+    \normalsize Wenbin Li$^{1}$ \\[0.3em]
+    \small $^{1}$Jiangnan University \\
+    {\tt\footnotesize 6243111035@Jiangnan.edu.cn}
+}
+\date{\vspace{-1.5em}}
+
+\begin{document}
+\maketitle
+
+% ==================== 0. 摘要与关键词 ====================
+\begin{abstract}
+\noindent\small
+\input{sec/0_abstract.tex}
+
+\vspace{0.4em}
+\noindent\textbf{Keywords:} Infrared and visible image fusion, state space model, MambaVision, feature decorrelation, gated fusion, contrast preservation.
+\end{abstract}
+\vspace{0.5em}
+
+% ==================== 1~5. 正文各章节模块化引入 ====================
+\input{sec/1_intro.tex}
+\input{sec/2_related.tex}
+\input{sec/3_method.tex}
+\input{sec/4_experiments.tex}
+\input{sec/5_conclusion.tex}
+
+% ==================== 参考文献 ====================
+{\small
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+}
+
+\end{document}
